@@ -64,7 +64,7 @@ app.get('/api/stats', async (req, res) => {
   try {
     const localUsage = await getLocalUsage();
 
-    // AWS counts (region ap-south-3)
+    // AWS counts (region ap-south-1)
     const ec2Res = await ec2.describeInstances().promise();
     let ec2Count = 0;
     ec2Res.Reservations.forEach(r => ec2Count += r.Instances.length);
@@ -77,7 +77,7 @@ app.get('/api/stats', async (req, res) => {
       hostname: os.hostname(),           // 🔥 BEDA TIAP EC2
       localCpu: localUsage.cpu,
       localRam: localUsage.ram,
-      region: 'ap-south-3',
+      region: 'ap-south-1',
       ec2Count,
       s3Count: s3Res.Buckets.length,
       rdsCount: rdsRes.DBInstances.length
